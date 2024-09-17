@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	android:weightSum="22"
+	android:background="#ffffff"
+    android:orientation="vertical">
+    <EditText android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/slistviewEdit"
+		android:layout_weight="1"/>
+	<ListView android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/slistviewlist"
+		android:layout_weight="21"/>
+</LinearLayout>
