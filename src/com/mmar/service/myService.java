@@ -37,6 +37,7 @@ public final static String StringCode="text";
 		@Override
 		public void handleMessage(Message msg)
 		{
+			onReceivedMsg(msg);
 			// TODO: Implement this method
 			switch(msg.what){
 				case RegisterClient:
@@ -64,6 +65,10 @@ public final static String StringCode="text";
 		}
 	
 }
+
+    public void onReceivedMsg(Message msg){
+		
+	}
 	public void onreceivedInt(int value){
 
 	}
@@ -102,6 +107,15 @@ public void sendMsgToUi(int value){
 		}
 	}
 }
+	public void sendMsgToUi(Message msg){
+		for(int i=mclients.size()-1;i>=0;i--){
+			try{
+				mclients.get(i).send(msg);
+			}catch(Exception e){
+				mclients.remove(i);
+			}
+		}
+	}
 public void sendMsgSpStringToUi(String value){
 	for(int i=mclients.size()-1;i>=0;i--){
 		try{

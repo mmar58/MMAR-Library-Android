@@ -39,7 +39,7 @@ public class serviceWallpaper extends WallpaperService
 		public void handleMessage(Message msg)
 		{
 			// TODO: Implement this method
-
+            onReceivedMsg(msg);
 			switch(msg.what){
 				case msgIntValue:
 					onreceivedInt(msg.arg1);
@@ -58,6 +58,10 @@ public class serviceWallpaper extends WallpaperService
 				    super.handleMessage(msg);
 			}
 		}
+
+	}
+	
+	public void onReceivedMsg(Message msg){
 
 	}
 	public void onreceivedInt(int value){

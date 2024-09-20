@@ -20,12 +20,12 @@ public class serviceActivity extends mActivity
 	final Messenger msnger=new Messenger(new IncomingHandler());
 	class IncomingHandler extends Handler
 	{
-
+ 
 		@Override
 		public void handleMessage(Message msg)
 		{
 			// TODO: Implement this method
-			
+			onReceivedMsg(msg);
 			switch(msg.what){
 				case msgIntValue:
 					onreceivedInt(msg.arg1);
@@ -45,6 +45,9 @@ public class serviceActivity extends mActivity
 			}
 		}
 
+	}
+	public void onReceivedMsg(Message msg){
+		
 	}
 	public void onreceivedInt(int value){
 
