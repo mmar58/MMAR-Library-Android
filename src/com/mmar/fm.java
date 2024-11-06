@@ -1,5 +1,7 @@
 package com.mmar;
 import java.io.File;
+
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.OutputStreamWriter;
@@ -17,11 +19,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.OutputStream;
 import com.mmar.standout.ui.Window;
+
+import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.content.res.AssetManager;
 import android.webkit.WebView;
 import android.webkit.WebSettings;
 import android.webkit.MimeTypeMap;
+
+import androidx.documentfile.provider.DocumentFile;
+
 public class fm
 {   public static String[] day={"Sun","Mon","Tue","Wed","Thus","Fri","Sat"};
     public static String[] month={"Jan","Feb","March","April","May","Jun","July","Aug","Sep","Oct","Nov","Dec"};
@@ -29,7 +36,23 @@ public class fm
 	public static String filedocWordtype="application/msword";
 	//Specific file paths
 	public static String syncedFileDatabasePath="sdcard/data/mmar/syncFileDB.db";
-	
+
+	// Loading info from URI
+	public static String getFileName(Uri uri,Context context){
+		DocumentFile documentFile = DocumentFile.fromSingleUri(context, uri);
+		return documentFile != null ? documentFile.getName() : null;
+	}
+	public static String getPathFromUri(Context context, Uri uri) {
+		String[] projection = {MediaStore.Images.Media.DATA};
+		Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+		if (cursor != null && cursor.moveToFirst()) {
+			int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+			String filePath = cursor.getString(columnIndex);
+			cursor.close();
+			return filePath;
+		}
+		return null;
+	}
 	public static String save(File file,String string){
 		File pr=file.getParentFile();
 		if(pr.exists()){}else{pr.mkdirs();}
